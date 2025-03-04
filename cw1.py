@@ -30,9 +30,11 @@ class initial_stickmen:
 class background:
     def __init__(self, img):
         #block colour
-        cv2.rectangle(img, (0,0), (1024,1024), (255, 0, 0), 1024)
+        cv2.rectangle(img, (0,0), (1024,1024), (100, 0, 0), -1)
         #sun
-        cv2.circle(img, (1024, 0), 50, (0, 0, 255), 300)
+        cv2.circle(img, (900, 10), 100, (200, 200, 200), -1)
+        #floor
+        cv2.rectangle(img, (0,500), (1024,1024), (100, 100, 100), -1)
 
 class buildings():
     def __init__(self, x, y, scale, color):
@@ -60,20 +62,26 @@ class buildings():
         cv2.rectangle(img, (self.x + int(5 * self.scale), self.y + int(45 * self.scale)), (self.x + int(12 * self.scale), self.y + int(52 * self.scale)), (255, 222 , 0), -1)
         cv2.rectangle(img, (self.x + int(23 * self.scale), self.y + int(45 * self.scale)), (self.x + int(30 * self.scale), self.y + int(52 * self.scale)), (255, 222 , 0), -1)
         #door
-
+        cv2.rectangle(img, (self.x + int(13 * self.scale), self.y + int(50 * self.scale)), (self.x + int(22 * self.scale), self.y + int(65 * self.scale)), (100, 0 , 0), -1)
 
 #drawing background
 background(frame1)
 #store buildings
 building = [
-    buildings(50, 200, scale=10, color = (0, 0 , 0))
+    buildings(350, 160, scale=10, color = (50, 50 , 50)),
+    buildings(700, 90, scale=10, color = (10, 10 , 10)),
+    buildings(0, 130, scale=10, color = (80, 80 , 80)),
+    buildings(50, 200, scale=10, color = (10, 10 , 10)),
+    buildings(450, 200, scale=10, color = (30, 30 , 30)),
+    buildings(750, 220, scale=10, color = (80, 80 , 80))
 ]
 #drawing buildings
 for build in building:
     build.buildings(frame1)
 #array for stickmen storage
 stickmen = [
-    initial_stickmen(200, 800, scale=2, color=(0, 255, 0), thickness=4)
+    initial_stickmen(200, 800, scale=2, color=(0, 255, 0), thickness=4),
+    initial_stickmen(800, 800, scale=2, color=(0, 0, 255), thickness=4)
 ]
 #draw stickmen
 for stickman in stickmen:
