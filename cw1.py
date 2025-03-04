@@ -28,9 +28,11 @@ class initial_stickmen:
         cv2.line(img, (self.x, self.y + (int(60 * self.scale))), leg_right, self.color, self.thickness)
 
 class background:
-    def __init__(self):
+    def __init__(self, img):
         #block colour
-        cv2.rectangle()
+        cv2.rectangle(img, (0,0), (1024,1024), (255, 0, 0), 1024)
+#drawing background
+background(frame1)
 #array for stickmen storage
 stickmen = [
     initial_stickmen(200, 200, scale=5, color=(0, 255, 0), thickness=1)
@@ -39,7 +41,6 @@ stickmen = [
 #draw stickmen
 for stickman in stickmen:
     stickman.draw(frame1)
-
 #show screen
 cv2.imshow('Stickmen Animation', frame1)
 cv2.waitKey(0)
