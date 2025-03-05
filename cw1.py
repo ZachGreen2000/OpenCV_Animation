@@ -88,7 +88,7 @@ class buildings():
         cv2.rectangle(img, (self.x + int(5 * self.scale), self.y + int(45 * self.scale)), (self.x + int(12 * self.scale), self.y + int(52 * self.scale)), (255, 222 , 0), -1)
         cv2.rectangle(img, (self.x + int(23 * self.scale), self.y + int(45 * self.scale)), (self.x + int(30 * self.scale), self.y + int(52 * self.scale)), (255, 222 , 0), -1)
         #door
-        cv2.rectangle(img, (self.x + int(13 * self.scale), self.y + int(50 * self.scale)), (self.x + int(22 * self.scale), self.y + int(65 * self.scale)), (100, 0 , 0), -1)
+        cv2.rectangle(img, (self.x + int(13 * self.scale), self.y + int(50 * self.scale)), (self.x + int(22 * self.scale), self.y + int(65 * self.scale)), (35, 35, 130), -1)
 
 class star():
     def __init__(self, pt1, pt2, pt3, pt4, pt5, pt6, pt7, pt8, pt9, pt10, color, scale):
@@ -147,5 +147,5 @@ for stickman in stickmen:
     stickman.draw(frame1)
 #show screen
 cv2.imshow('Stickmen Animation', frame1)
-cv2.waitKey(2000)
-cv2.destroyWindow('Stickmen Animation')
+cv2.waitKey(0)
+cv2.destroyAllWindows()
