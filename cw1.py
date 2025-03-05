@@ -1,8 +1,8 @@
 import cv2
 import numpy as np
 
-frame1 = np.zeros((1024,1024,3), np.uint8)
-
+#frame1 = np.zeros((1024,1024,3), np.uint8)
+#first frame stickman
 class initial_stickmen:
     def __init__(self, x, y, scale=0, color=(0,0,0), thickness=0):
         self.x = x
@@ -26,7 +26,31 @@ class initial_stickmen:
         leg_right = (self.x + int(30 * self.scale), self.y + int(90 * self.scale))
         cv2.line(img, (self.x, self.y + (int(60 * self.scale))), leg_left, self.color, self.thickness)
         cv2.line(img, (self.x, self.y + (int(60 * self.scale))), leg_right, self.color, self.thickness)
+#second frame stickman
+class second_stickman:
+    def __init__(self, x, y, scale=0, color=(0,0,0), thickness=0):
+        self.x = x
+        self.y = y
+        self.scale = scale
+        self.color = color
+        self.thickness = thickness
 
+    def draw(self, img):
+        #head
+        cv2.circle(img, (self.x, self.y), (int(20 * self.scale)), self.color, -1)
+        #body
+        cv2.rectangle(img, (self.x - int(10 * self.scale), self.y + int(20 * self.scale)), (self.x + int(10 * self.scale), self.y + int(60 * self.scale)), self.color, -1)
+        #arms
+        arm_left = (self.x - int(30 * self.scale), self.y + int(30 * self.scale))
+        arm_right = (self.x + int(30 * self.scale), self.y + int(30 * self.scale))
+        cv2.line(img, (self.x - int(10 * self.scale), self.y + int(30 * self.scale)), arm_left, self.color, self.thickness)
+        cv2.line(img, (self.x + int(10 * self.scale), self.y + int(30 * self.scale)), arm_right, self.color, self.thickness)
+        #legs
+        leg_left = (self.x - int(30 * self.scale), self.y + int(90 * self.scale))
+        leg_right = (self.x + int(30 * self.scale), self.y + int(90 * self.scale))
+        cv2.line(img, (self.x, self.y + (int(60 * self.scale))), leg_left, self.color, self.thickness)
+        cv2.line(img, (self.x, self.y + (int(60 * self.scale))), leg_right, self.color, self.thickness)
+#drawing for background
 class background:
     def __init__(self, img):
         #block colour
@@ -85,8 +109,6 @@ class star():
         points = np.array([[self.pt1], [self.pt2], [self.pt3], [self.pt4], [self.pt5], [self.pt6], [self.pt7], [self.pt8], [self.pt9], [self.pt10]], np.int32)
         cv2.fillPoly(img, [points * self.scale], self.color)
 
-#drawing background
-background(frame1)
 #store stars
 stars = [
     star((3,13), (5,10), (2,8), (6,8), (7,5), (8,8), (12,8), (9,10), (11,13), (7,11), color=(240, 240, 240), scale=8),
@@ -95,9 +117,6 @@ stars = [
     star((83,13), (85,10), (82,8), (86,8), (87,5), (88,8), (92,8), (89,10), (91,13), (87,11), color=(240, 240, 240), scale=8),
     star((43,13), (45,10), (42,8), (46,8), (47,5), (48,8), (52,8), (49,10), (51,13), (47,11), color=(240, 240, 240), scale=10)
 ]
-#draw stars
-for st in stars:
-    st.draw_star(frame1)
 #store buildings
 building = [
     buildings(350, 160, scale=10, color = (50, 50 , 50)),
@@ -107,18 +126,26 @@ building = [
     buildings(450, 200, scale=10, color = (30, 30 , 30)),
     buildings(750, 220, scale=10, color = (80, 80 , 80))
 ]
-#drawing buildings
-for build in building:
-    build.buildings(frame1)
 #array for stickmen storage
 stickmen = [
     initial_stickmen(200, 800, scale=2, color=(0, 255, 0), thickness=4),
     initial_stickmen(800, 800, scale=2, color=(0, 0, 255), thickness=4)
 ]
+for _ in range(5):
+    frame1 = np.zeros((1024,1024,3), np.uint8)
+#drawing for frame 1
+#drawing background
+background(frame1)
+#draw stars
+for st in stars:
+    st.draw_star(frame1)
+    #drawing buildings
+for build in building:
+    build.buildings(frame1)
 #draw stickmen
 for stickman in stickmen:
     stickman.draw(frame1)
 #show screen
 cv2.imshow('Stickmen Animation', frame1)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+cv2.waitKey(2000)
+cv2.destroyWindow('Stickmen Animation')
