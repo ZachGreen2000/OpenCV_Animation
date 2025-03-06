@@ -50,6 +50,30 @@ class second_stickman:
         leg_right = (self.x + int(30 * self.scale), self.y + int(90 * self.scale))
         cv2.line(img, (self.x, self.y + (int(60 * self.scale))), leg_left, self.color, self.thickness)
         cv2.line(img, (self.x, self.y + (int(60 * self.scale))), leg_right, self.color, self.thickness)
+#third stickmen
+class third_stickman:
+    def __init__(self, x, y, scale=0, color=(0,0,0), thickness=0):
+        self.x = x
+        self.y = y
+        self.scale = scale
+        self.color = color
+        self.thickness = thickness
+
+    def draw(self, img):
+        #head
+        cv2.circle(img, (self.x, self.y), (int(20 * self.scale)), self.color, -1)
+        #body
+        cv2.rectangle(img, (self.x - int(10 * self.scale), self.y + int(20 * self.scale)), (self.x + int(10 * self.scale), self.y + int(60 * self.scale)), self.color, -1)
+        #arms
+        arm_left = (self.x - int(30 * self.scale), self.y + int(30 * self.scale))
+        arm_right = (self.x + int(30 * self.scale), self.y + int(30 * self.scale))
+        cv2.line(img, (self.x - int(10 * self.scale), self.y + int(30 * self.scale)), arm_left, self.color, self.thickness)
+        cv2.line(img, (self.x + int(10 * self.scale), self.y + int(30 * self.scale)), arm_right, self.color, self.thickness)
+        #legs
+        leg_left = (self.x - int(30 * self.scale), self.y + int(90 * self.scale))
+        leg_right = (self.x + int(30 * self.scale), self.y + int(90 * self.scale))
+        cv2.line(img, (self.x, self.y + (int(60 * self.scale))), leg_left, self.color, self.thickness)
+        cv2.line(img, (self.x, self.y + (int(60 * self.scale))), leg_right, self.color, self.thickness)
 #drawing for background
 class background:
     def __init__(self, img):
@@ -136,6 +160,14 @@ stickmen2 = [
     second_stickman(400, 800, scale=2, color=(0,255,0), thickness=4),
     second_stickman(500, 800, scale=2, color=(0,0,255), thickness=4),
 ]
+#array for frame 3 of stickmen
+stickmen3 = [
+    
+]
+#array for frame 4 of stickmen
+stickmen4 = [
+
+]
 frameCheck = 0 # flag for stickman frame
 for _ in range(200):
     frame1 = np.zeros((1024,1024,3), np.uint8)
@@ -148,15 +180,23 @@ for _ in range(200):
     for build in building:
         build.buildings(frame1)
     #checking for stickman frame
-    if (frameCheck < 100):
+    if (frameCheck < 50):
         #draw stickmen
         print ("first stick")
         for stickman in stickmen:
             stickman.draw(frame1)
-    elif (frameCheck < 200):
+    elif (frameCheck < 100):
         print ("stick 2")
         for stickman2 in stickmen2:
             stickman2.draw(frame1)
+    elif (frameCheck < 150):
+        print ("stick 3")
+        for stickman3 in stickmen3:
+            stickman3.draw(frame1)
+    elif (frameCheck < 200):
+        print ("stick 4")
+        for stickman4 in stickmen4:
+            stickman4.draw(frame1)
     #show screen
     cv2.imshow('Stickmen Animation', frame1)
 
