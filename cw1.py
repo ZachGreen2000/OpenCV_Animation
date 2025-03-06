@@ -46,8 +46,8 @@ class second_stickman:
         cv2.line(img, (self.x - int(10 * self.scale), self.y + int(30 * self.scale)), arm_left, self.color, self.thickness)
         cv2.line(img, (self.x + int(10 * self.scale), self.y + int(30 * self.scale)), arm_right, self.color, self.thickness)
         #legs
-        leg_left = (self.x - int(30 * self.scale), self.y + int(90 * self.scale))
-        leg_right = (self.x + int(30 * self.scale), self.y + int(90 * self.scale))
+        leg_left = (self.x - int(10 * self.scale), self.y + int(90 * self.scale))
+        leg_right = (self.x + int(10 * self.scale), self.y + int(90 * self.scale))
         cv2.line(img, (self.x, self.y + (int(60 * self.scale))), leg_left, self.color, self.thickness)
         cv2.line(img, (self.x, self.y + (int(60 * self.scale))), leg_right, self.color, self.thickness)
 #third stickmen
@@ -74,6 +74,30 @@ class third_stickman:
         leg_right = (self.x + int(30 * self.scale), self.y + int(90 * self.scale))
         cv2.line(img, (self.x, self.y + (int(60 * self.scale))), leg_left, self.color, self.thickness)
         cv2.line(img, (self.x, self.y + (int(60 * self.scale))), leg_right, self.color, self.thickness)
+#forth stickmen
+class fourth_stickman:
+    def __init__(self, x, y, scale=0, color=(0,0,0), thickness=0):
+        self.x = x
+        self.y = y
+        self.scale = scale
+        self.color = color
+        self.thickness = thickness
+
+    def draw(self, img):
+        #head
+        cv2.circle(img, (self.x, self.y), (int(20 * self.scale)), self.color, -1)
+        #body
+        cv2.rectangle(img, (self.x - int(10 * self.scale), self.y + int(20 * self.scale)), (self.x + int(10 * self.scale), self.y + int(60 * self.scale)), self.color, -1)
+        #arms
+        arm_left = (self.x - int(30 * self.scale), self.y + int(30 * self.scale))
+        arm_right = (self.x + int(30 * self.scale), self.y + int(30 * self.scale))
+        cv2.line(img, (self.x - int(10 * self.scale), self.y + int(30 * self.scale)), arm_left, self.color, self.thickness)
+        cv2.line(img, (self.x + int(10 * self.scale), self.y + int(30 * self.scale)), arm_right, self.color, self.thickness)
+        #legs
+        leg_left = (self.x - int(10 * self.scale), self.y + int(90 * self.scale))
+        leg_right = (self.x + int(10 * self.scale), self.y + int(90 * self.scale))
+        cv2.line(img, (self.x, self.y + (int(60 * self.scale))), leg_left, self.color, self.thickness)
+        cv2.line(img, (self.x, self.y + (int(60 * self.scale))), leg_right, self.color, self.thickness)
 #drawing for background
 class background:
     def __init__(self, img):
@@ -85,7 +109,7 @@ class background:
         cv2.rectangle(img, (0,500), (1024,1024), (100, 100, 100), -1)
         cv2.rectangle(img, (0,500), (1024,900), (60, 60, 60), -1)
         cv2.putText(img, "Zach Green", (820, 50), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 0, 0))
-
+#for drawing buildings
 class buildings():
     def __init__(self, x, y, scale, color,):
         self.x = x
@@ -113,7 +137,7 @@ class buildings():
         cv2.rectangle(img, (self.x + int(23 * self.scale), self.y + int(45 * self.scale)), (self.x + int(30 * self.scale), self.y + int(52 * self.scale)), (255, 222 , 0), -1)
         #door
         cv2.rectangle(img, (self.x + int(13 * self.scale), self.y + int(50 * self.scale)), (self.x + int(22 * self.scale), self.y + int(65 * self.scale)), (35, 35, 130), -1)
-
+#for drawing stars
 class star():
     def __init__(self, pt1, pt2, pt3, pt4, pt5, pt6, pt7, pt8, pt9, pt10, color, scale):
         self.pt1 = pt1
@@ -157,16 +181,18 @@ stickmen = [
 ]
 #array for frame 2 of stickmen
 stickmen2 = [
-    second_stickman(400, 800, scale=2, color=(0,255,0), thickness=4),
-    second_stickman(500, 800, scale=2, color=(0,0,255), thickness=4),
+    second_stickman(250, 800, scale=2, color=(0,255,0), thickness=4),
+    second_stickman(750, 800, scale=2, color=(0,0,255), thickness=4),
 ]
 #array for frame 3 of stickmen
 stickmen3 = [
-    
+    third_stickman(300, 800, scale=2, color=(0,255,0), thickness=4),
+    third_stickman(700, 800, scale=2, color=(0,0,255), thickness=4),
 ]
 #array for frame 4 of stickmen
 stickmen4 = [
-
+    fourth_stickman(350, 800, scale=2, color=(0,255,0), thickness=4),
+    fourth_stickman(650, 800, scale=2, color=(0,0,255), thickness=4),
 ]
 frameCheck = 0 # flag for stickman frame
 for _ in range(200):
