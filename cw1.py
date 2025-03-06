@@ -131,21 +131,37 @@ stickmen = [
     initial_stickmen(200, 800, scale=2, color=(0, 255, 0), thickness=4),
     initial_stickmen(800, 800, scale=2, color=(0, 0, 255), thickness=4)
 ]
-for _ in range(5):
+#array for frame 2 of stickmen
+stickmen2 = [
+    second_stickman(400, 800, scale=2, color=(0,255,0), thickness=4),
+    second_stickman(500, 800, scale=2, color=(0,0,255), thickness=4),
+]
+frameCheck = 0 # flag for stickman frame
+for _ in range(200):
     frame1 = np.zeros((1024,1024,3), np.uint8)
-#drawing for frame 1
-#drawing background
-background(frame1)
-#draw stars
-for st in stars:
-    st.draw_star(frame1)
-    #drawing buildings
-for build in building:
-    build.buildings(frame1)
-#draw stickmen
-for stickman in stickmen:
-    stickman.draw(frame1)
-#show screen
-cv2.imshow('Stickmen Animation', frame1)
-cv2.waitKey(0)
+    #drawing background
+    background(frame1)
+    #draw stars
+    for st in stars:
+        st.draw_star(frame1)
+        #drawing buildings
+    for build in building:
+        build.buildings(frame1)
+    #checking for stickman frame
+    if (frameCheck < 100):
+        #draw stickmen
+        print ("first stick")
+        for stickman in stickmen:
+            stickman.draw(frame1)
+    elif (frameCheck < 200):
+        print ("stick 2")
+        for stickman2 in stickmen2:
+            stickman2.draw(frame1)
+    #show screen
+    cv2.imshow('Stickmen Animation', frame1)
+
+    if cv2.waitKey(50) & 0xFF == ord('q'):
+        break
+    frameCheck = (frameCheck + 1) % 200
+#cv2.waitKey(0)
 cv2.destroyAllWindows()
